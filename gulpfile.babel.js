@@ -14,7 +14,7 @@ import gutil from 'gulp-util';
 
 const browserSync = browserSyncCreate();
 
-gulp.task('sass', () => {
+gulp.task('sass', () =>
   gulp
     .src('src/styles/*.scss')
     .pipe(sourcemaps.init())
@@ -23,10 +23,9 @@ gulp.task('sass', () => {
     .pipe(autoprefixer())
     .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest('public/css/'))
-    .pipe(browserSync.stream());
-});
+    .pipe(browserSync.stream()));
 
-gulp.task('build', () => {
+gulp.task('build', () =>
   browserify({
     entries: 'src/scripts/main.js',
     debug: true,
@@ -39,8 +38,7 @@ gulp.task('build', () => {
     .pipe(uglify())
     .on('error', gutil.log)
     .pipe(sourcemaps.write('.'))
-    .pipe(gulp.dest('public/js/'));
-});
+    .pipe(gulp.dest('public/js/')));
 
 gulp.task('js-watch', ['build'], done => {
   browserSync.reload();
